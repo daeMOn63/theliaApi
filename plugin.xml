@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<plugin>
+    <nom>TheliaApi</nom>
+    <version>0.1</version>
+    <prefix>theliaApi</prefix>
+    <type>classique</type>
+    <auteur>Manuel Raynaud - raynaud.manu@gmail.com</auteur>
+    <thelia>1.5.2</thelia>
+    <description>Api Rest pour Thelia</description>
+    <rubrique></rubrique>
+    <lien></lien>
+    <documentation>Readme.txt</documentation>
+    <etat>alpha</etat>
+    <install></install>
+</plugin>
