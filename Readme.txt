@@ -1,5 +1,7 @@
 Plugin TheliaApi permettant de rajouter une api au CMS e-commerce Thelia.
 
+En cours de développement, à ne pas utiliser sur un environnement de production.
+
 INSTALLATION: 
 
     via git : 
