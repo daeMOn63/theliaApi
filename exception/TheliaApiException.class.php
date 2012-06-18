@@ -16,6 +16,7 @@ class TheliaApiException extends Exception{
     const WARNING                                   = 0x20000000;
     
     const E_createAccount                           = 0x00100000;
+    const E_listCustomer                            = 0x00200000;
     
     const E_parameter                               = 0x00010000;
     const E_country                                 = 0x00020000;

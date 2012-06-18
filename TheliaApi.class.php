@@ -172,7 +172,9 @@ class TheliaApi extends PluginsClassiques
                     case 'create_account':
                         $this->createAccount();
                         break;
-
+                    case 'list_customer':
+                        $this->listCustomer();
+                        break;
                     default : 
                         ActionsModules::instance()->appel_module("api",$subaction);
                         break;
@@ -327,5 +329,57 @@ class TheliaApi extends PluginsClassiques
         unset($client->table);
         
         TheliaApiTools::displayResult(array('status' => 'ok','client' =>$client));
+    }
+    
+    
+    /**
+     * @param integer $limit => The number of results to return (default : 50)
+     * @param integer $offset => Result to start at (default : 0)
+     */
+    public function listCustomer()
+    {
+        TheliaApiException::throwApiExceptionFaultUnless(
+                $this->checkAccess('clients',1,0),
+                TheliaApiException::ERROR,
+                TheliaApiException::E_unavailable);
+        
+        extract(TheliaApiTools::extractParam(array(
+            'limit' => array('type' => 'int', 'default' => 50),
+            'offset' => array('type' => 'int', 'default' => 0),
+            'name' => 'optional',
+            'ref' => 'optional',
+            'id' => array('type' => 'int', 'required' => false),
+            'order' => array('type' => 'string', 'default' => 'nom')
+        ),
+        TheliaApiException::E_listCustomer));
+                
+        $query = 'SELECT id, ref, datecrea, raison, entreprise, siret, intracom, nom, prenom, telfixe, telport, email, adresse1, adresse2, adresse3, cpostal, ville, pays, parrain, type, pourcentage, lang FROM '.Client::TABLE;
+        
+        $search = ' WHERE 1';
+        
+        if(!empty($name))
+        {
+            $search .= ' AND nom LIKE \''.$name.'\'';
+        }
+        
+        if(!empty($ref))
+        {
+            $search .= ' AND ref=\''.$ref.'\'';
+        }
+        
+        if(!empty($id))
+        {
+            $search .= ' AND id='.$id;
+        }
+        
+        $query .= $search;
+        
+        $query .= ' ORDER BY '.$order;
+        
+        $query .= ' LIMIT '.$offset.','.$limit;
+        
+        $results = $this->query_liste($query);
+        
+        TheliaApiTools::displayResult(array('status' => 'ok', 'clients' => $results));
     }
 }
