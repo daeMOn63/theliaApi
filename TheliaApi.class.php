@@ -175,6 +175,9 @@ class TheliaApi extends PluginsClassiques
                     case 'list_customer':
                         $this->listCustomer();
                         break;
+                    case 'list_countries':
+                        $this->listCountries();
+                        break;
                     default : 
                         ActionsModules::instance()->appel_module("api",$subaction);
                         break;
@@ -393,5 +396,28 @@ class TheliaApi extends PluginsClassiques
         $results = $this->query_liste($query);
         
         TheliaApiTools::displayResult(array('status' => 'ok', 'clients' => $results));
+    }
+    
+    /**
+     * List all countries with isocode and alphacode 
+     * 
+     * Needs access_configuration read access
+     * 
+     * @throws TheliaApiException 
+     * 
+     */
+    public function listCountries()
+    {
+        TheliaApiException::throwApiExceptionFaultUnless(
+                $this->checkAccess('configuration',1,0),
+                TheliaApiException::ERROR,
+                TheliaApiException::E_unavailable);
+        
+        $query = 'SELECT pd.titre, p.id, p.isocode, p.isoalpha2, p.isoalpha3 FROM '.Pays::TABLE.' p LEFT JOIN '.Paysdesc::TABLE.' pd ON p.id = pd.pays WHERE pd.lang=1';
+
+        $countries = $this->query_liste($query);
+        
+        TheliaApiTools::displayResult(array("status" => "ok", "countries" => $countries));
+        
     }
 }
