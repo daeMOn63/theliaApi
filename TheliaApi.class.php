@@ -333,8 +333,20 @@ class TheliaApi extends PluginsClassiques
     
     
     /**
+     * 
+     * return list of customer
+     * 
      * @param integer $limit => The number of results to return (default : 50)
      * @param integer $offset => Result to start at (default : 0)
+     * @param string $nom => search on customer name - optional
+     * @param string $ref => search on customer ref - optional
+     * @param integer $id => search on customer id - optional
+     * @param order => order results on column you want (default : nom ASC)
+     * 
+     * Needs acces_clients read access
+     * 
+     * @throws TheliaApiException 
+     * 
      */
     public function listCustomer()
     {
