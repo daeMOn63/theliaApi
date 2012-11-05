@@ -7,6 +7,8 @@ require_once(realpath(dirname(__FILE__)) . '/exception/TheliaApiException.class.
 require_once(realpath(dirname(__FILE__)) . '/lib/TheliaApiTools.class.php');
 
 require_once(realpath(dirname(__FILE__)) . '/lib/subactions/TheliaUserSubActions.class.php');
+require_once(realpath(dirname(__FILE__)) . '/lib/subactions/TheliaRubriqueSubActions.class.php');
+require_once(realpath(dirname(__FILE__)) . '/lib/subactions/TheliaProductSubActions.class.php');
 
 
 class TheliaApi extends PluginsClassiques
@@ -34,18 +36,19 @@ class TheliaApi extends PluginsClassiques
         parent::__construct($name);
 
         $this->registerSubActions(new TheliaUserSubActions($this));
+        $this->registerSubActions(new TheliaRubriqueSubActions($this));
+        $this->registerSubActions(new TheliaProductSubActions($this));
     }
 
 
     protected function registerSubActions(AbstractTheliaSubActions $subActions) {
         $actions = $subActions->getSubActions();
         foreach($actions as $action => $callback) {
-            TheliaApiException::throwApiExceptionFaultIf(
-                array_key_exists($action, $this->subActions),
-                TheliaApiException::ERROR
-            );
-
-            $this->subActions[$action] = $callback;
+            if(array_key_exists($action, $this->subActions)) {
+                TheliaApiTools::displayError("registerSubActions", get_class($subActions). " redefines an existing subaction : '".$action."'");
+            }else {
+                $this->subActions[$action] = $callback;
+            }
         }
     }
 
