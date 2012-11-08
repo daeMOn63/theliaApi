@@ -1,15 +1,5 @@
 <?php
-
-require_once(realpath(dirname(__FILE__)) . '/../../../classes/PluginsClassiques.class.php');
-require_once(realpath(dirname(__FILE__)) . '/../../../classes/Client.class.php');
-require_once(realpath(dirname(__FILE__)) . '/../../../classes/Pays.class.php');
-require_once(realpath(dirname(__FILE__)) . '/exception/TheliaApiException.class.php');
-require_once(realpath(dirname(__FILE__)) . '/lib/TheliaApiTools.class.php');
-
-require_once(realpath(dirname(__FILE__)) . '/lib/subactions/TheliaUserSubActions.class.php');
-require_once(realpath(dirname(__FILE__)) . '/lib/subactions/TheliaRubriqueSubActions.class.php');
-require_once(realpath(dirname(__FILE__)) . '/lib/subactions/TheliaProductSubActions.class.php');
-
+Autoload::getInstance()->addDirectories(array(__DIR__ . "/exception/", __DIR__ . "/lib/", __DIR__ . "/lib/subactions"));
 
 class TheliaApi extends PluginsClassiques
 {

@@ -15,4 +15,15 @@ abstract class AbstractTheliaSubActions {
 	 * See TheliaUserSubActions.class.php for implementation exemple.
 	 */
 	public abstract function getSubActions();
+
+
+	protected function checkAuthenticationOrThrow() {
+	    TheliaApiException::throwApiExceptionFaultUnless(
+	        $this->api->checkAccess('clients',0,1),
+	        TheliaApiException::ERROR,
+	        TheliaApiException::E_unavailable);
+	}
+
+
+
 }

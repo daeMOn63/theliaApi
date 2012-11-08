@@ -17,8 +17,7 @@ class TheliaApiException extends Exception{
 
     const E_createAccount                           = 0x00100000;
     const E_listCustomer                            = 0x00200000;
-    const E_createProduct                           = 0x00300000;
-    const E_createProductDesc                       = 0x00400000;
+    const E_productSubActions                       = 0x00300000;
 
     const E_parameter                               = 0x00010000;
     const E_country                                 = 0x00020000;
@@ -27,12 +26,14 @@ class TheliaApiException extends Exception{
     const E_account                                 = 0x00050000;
     const E_product                                 = 0x00060000;
     const E_productdesc                             = 0x00070000;
+    const E_image                                   = 0x00080000;
 
     const E_missing                                 = 0x00000001;
     const E_wrong                                   = 0x00000002;
     const E_exists                                  = 0x00000003;
     const E_unavailable                             = 0x00000004;
     const E_notFound                                = 0x00000005;
+    const E_io                                      = 0x00000006;
 
     static private $errorMessage = array(
         10110001 => 'Missing mandatory Parameter',
@@ -41,9 +42,11 @@ class TheliaApiException extends Exception{
         10140001 => 'Missing cell phone number',
         10150003 => 'Account already exists',
         10000004 => 'unavailable Resource',
+        10310001 => "Missing parameter",
         10310003 => 'Product ref already exists',
-        10460005 => 'Product does not exists',
-        10470003 => 'Product desc already exists for this lang',
+        10360005 => 'Product does not exists',
+        10370003 => 'Product desc already exists for this lang',
+        10380006 => 'I/O error while copying resource',
     );
 
     /**
