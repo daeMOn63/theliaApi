@@ -21,7 +21,6 @@ $id = lireParam('id', $id);
 
 		$.ajax({type:'GET', url:'module.php?nom=theliaApi&view=ajax_rule', data:'autorisation='+autorisation+'&apiAuth=<?php echo $id; ?>' + '&mode=' + mode + '&valeur=' + valeur})
 	}
-
 </script>
 
 <div id="contenu_int">

@@ -17,7 +17,7 @@ class TheliaProductSubActions extends AbstractTheliaSubActions {
         'prix2' 		=> array('type' => 'float', 'required' => false),
         'nouveaute' 	=> array('type' => 'boolean', 'default' => false),
         'stock' 		=> array('type' => 'int', 'required' => false),
-        'ligne' 		=> array('type' => 'boolean', 'required' => false),
+        'ligne' 		=> array('type' => 'int', 'required' => false),
         'poids' 		=> array('type' => 'float', 'required' => false),
         'tva' 			=> array('type' => 'float', 'required' => false),
         'classement' 	=> array('type' => 'int', 'required' => false),
@@ -65,7 +65,7 @@ class TheliaProductSubActions extends AbstractTheliaSubActions {
         // switch on required fields on creation
         $this->productParams["prix"]["required"] = true;
         $this->productParams["stock"]["required"] = true;
-        $this->productParams["ligne"]["required"] = true;
+        $this->productParams["ligne"]["required"] = false;
 
       	$params = TheliaApiTools::extractParam($this->productParams, TheliaApiException::E_productSubActions);
 
