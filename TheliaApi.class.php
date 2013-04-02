@@ -182,7 +182,11 @@ class TheliaApi extends PluginsClassiques
                 if(array_key_exists($subaction, $this->subActions)) {
                     call_user_func($this->subActions[$subaction]);
                 }else{
-                    ActionsModules::instance()->appel_module("api",$subaction);
+                    TheliaApiException::throwApiExceptionFault(
+                        TheliaApiException::ERROR,
+                        TheliaApiException::E_subaction,
+                        TheliaApiException::E_notFound
+                    );
                 }
             }
             catch(TheliaApiException $e)

@@ -18,6 +18,7 @@ class TheliaApiException extends Exception{
     const E_createAccount                           = 0x00100000;
     const E_listCustomer                            = 0x00200000;
     const E_productSubActions                       = 0x00300000;
+    const E_subaction                               = 0x00400000;
 
     const E_parameter                               = 0x00010000;
     const E_country                                 = 0x00020000;
@@ -47,6 +48,7 @@ class TheliaApiException extends Exception{
         10360005 => 'Product does not exists',
         10370003 => 'Product desc already exists for this lang',
         10380006 => 'I/O error while copying resource',
+        10400005 => 'subaction method does not exists',
     );
 
     /**

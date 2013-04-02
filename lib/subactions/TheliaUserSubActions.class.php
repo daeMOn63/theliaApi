@@ -55,8 +55,6 @@ class TheliaUserSubActions extends AbstractTheliaSubActions {
                 TheliaApiException::ERROR,
                 TheliaApiException::E_unavailable);
 
-
-
         extract(TheliaApiTools::extractParam(array(
             'raison' => array('type' => 'int', 'required' => true),
             'entreprise' => 'optional',
@@ -89,8 +87,8 @@ class TheliaUserSubActions extends AbstractTheliaSubActions {
         $errorCode = 0;
         $paysSearch = new Pays();
         TheliaApiException::throwApiExceptionFaultUnless(
-                $paysSearch->getVars('SELECT * FROM '.$paysSearch->table.' WHERE isocode=\''.$pays.'\''),
-                TheliaApiException::WARNING,
+                $paysSearch->getVars('SELECT * FROM '.$paysSearch->table.' WHERE isoalpha3=\''.$pays.'\''),
+                TheliaApiException::ERROR,
                 TheliaApiException::E_createAccount,
                 TheliaApiException::E_country,
                 TheliaApiException::E_wrong);

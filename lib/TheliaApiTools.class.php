@@ -2,6 +2,7 @@
 
 class TheliaApiTools{
 
+
     /**
      * display errors as json
      *
@@ -17,6 +18,27 @@ class TheliaApiTools{
             'errorMessage' => $message,
             'errorCode' => $code
         );
+
+        switch($code) {
+            case 10400005:
+                $httpCode = 404;
+                break;
+
+            case 10110001:
+                $httpCode = 400;
+                break;
+            default:
+                $httpCode = 500;
+                break;
+        }
+
+        $headers = array(
+            400 => "HTTP/1.0 400 Bad Request",
+            404 => "HTTP/1.0 404 Not Found",
+            500 => "HTTP/1.0 500 Internal Server Error"
+        );
+
+        header($headers[$httpCode]);
         self::displayResult($result);
     }
 
